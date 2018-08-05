@@ -108,6 +108,8 @@ class App extends Component {
     images: [],
     display: [],
     currentlyDisplaying: "", 
+    titleText: "",
+    descriptionText: "",
     tasks: [
       {
         id: 1,
@@ -175,6 +177,21 @@ class App extends Component {
     display.push(tasks);
     this.setState({display:display, currentlyDisplaying: date});
   }
+
+  handleInputChange = event => {
+    console.log(event.target.value);
+    this.setState({[event.target.name]: event.target.value})
+  }
+
+  addTask = (title, description) => {
+    if(title.length > 0 && description.length > 0){
+      console.log(title)
+      console.log(description);
+    } else {
+      alert("Title and Description Required");
+    }
+    
+  }
   
   
   render() {
@@ -227,7 +244,7 @@ class App extends Component {
         </CalenderContainer>
       </Container>
       <RightDisplay>
-        <AddTaskForm>
+        <AddTaskForm handleClick = {this.addTask} titleValue = {this.state.titleText} descriptionValue = {this.state.descriptionText} handleChange = {this.handleInputChange}>
         </AddTaskForm>
       </RightDisplay>
       </BigDiv>

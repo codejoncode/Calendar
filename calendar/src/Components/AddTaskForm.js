@@ -22,21 +22,21 @@ class AddTaskForm extends React.Component{
             <FormContainer>
                 <Form>
                     <FormGroup>
-                        <Label for ="titleText">Title</Label>
+                        <Label>Title</Label>
                         <br/>
-                        <Input type="textarea" name="text" id="titleText" />
+                        <Input onChange = {this.props.handleChange} type="textarea" name="titleText" id="titleText" value = {this.props.titleValue}/>
                         <br/>
                     </FormGroup>
                     <FormGroup>
-                    <Label for = "descriptionText">Description</Label>
+                    <Label>Description</Label>
                     <br/>
-                    <Input type="textarea" name="text" id="descriptionText" />
+                    <Input onChange = {this.props.handleChange} type="textarea" name="descriptionText" id="descriptionText" value = {this.props.descriptionValue} />
                     </FormGroup>
                     <br/>
-                    <button>Add Task</button>
+                    <button onClick = {this.props.handleClick}>Add Task</button>
                 </Form>
             </FormContainer>
-            
+
         );
     }
 }
