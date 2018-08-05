@@ -18,6 +18,7 @@ import photo10 from './images/photo10.jpg';
 import photo11 from './images/photo11.jpeg';
 import photo12 from './images/photo12.jpeg';
 import Task from './Components/Task.js';
+import AddTaskForm from './Components/AddTaskForm.js';
 
 const images= [photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9, photo10, photo11, photo12]; 
 const CalenderContainer = styled.div`
@@ -73,12 +74,14 @@ const LeftDisplay = styled.div`
   width: 400px;
   max-width: 100%;
   border: 1px solid blue; 
+  margin-left: 10px;
 `;
 
 const RightDisplay = styled.div`
   width: 400px; 
   max-width: 100%;
   border: 1px solid blue;
+  margin-right: 10px;
 `;
 
 const SearchSection = styled.div`
@@ -89,9 +92,7 @@ const SearchSection = styled.div`
     height: 50px;
     max-width: 100%; 
   }
-
 `;
-
 
 class App extends Component {
   constructor(){
@@ -140,28 +141,7 @@ class App extends Component {
   }
 
 
-  addTask = (date, task) => {
-    this.setState(({ tasks }) => ({
-    tasks: [
-        ...tasks,
-        {
-        id: Date.now(),
-        date,
-        task,
-        completed: false
-        }
-    ]
-    }));
-  };
-
-  getTasks = date => {
-    console.log(date);
-    this.setState(({ tasks }) => ({
-    UItasks: tasks.filter(task => {
-        return moment(task.date).isSame(moment(date));
-    })
-    }));
-  }; 
+  
   
 
   previousYear = () => {
@@ -191,11 +171,8 @@ class App extends Component {
   }
 
   taskClick = (tasks, date) => {
-   
-    console.log(date);
     const display = [];
     display.push(tasks);
-    console.log(display); 
     this.setState({display:display, currentlyDisplaying: date});
   }
   
@@ -204,7 +181,7 @@ class App extends Component {
     let days = [];
     let begin = this.state.start[this.state.index].slice();
     let end = this.state.end[this.state.index].slice();
-    console.log(begin, end);   
+      
     for (
       let i = moment(begin);
       i.isSameOrBefore(moment(end));// checking if the moment is at the largest date. 
@@ -250,6 +227,8 @@ class App extends Component {
         </CalenderContainer>
       </Container>
       <RightDisplay>
+        <AddTaskForm>
+        </AddTaskForm>
       </RightDisplay>
       </BigDiv>
     );

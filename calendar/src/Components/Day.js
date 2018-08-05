@@ -23,7 +23,7 @@ class Day extends React.Component {
         this.state = {
            tasks: {
                 id: Date.now(),
-                date: [this.props.data, this.props.weekDay],
+                tasks: [],
                 task: 'hello',
                 completed: false
                 }
@@ -32,7 +32,6 @@ class Day extends React.Component {
     }
 
     componentDidMount(){
-        const date = [this.props.data, this.props.weekDay]
         this.setState({tasks: {id:Date.now(), date: [this.props.data, this.props.weekDay], task: ''}});
     }
 
