@@ -27,7 +27,8 @@ class Task extends React.Component{
 
         return (
             <TaskContainer>
-                <h1>Task for {this.props.display}</h1>
+                <h1>Task for {this.props.weekDay} {this.props.month} {this.props.date} {this.props.year}</h1>
+                <br/>
                 <br/>
                 <p>{this.props.task}</p>
                 <br/>

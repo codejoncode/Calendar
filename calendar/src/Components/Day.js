@@ -44,7 +44,7 @@ class Day extends React.Component {
         // console.log("done");
         return (
 
-            <DayStyled onClick = {() => this.props.onClick(this.state.tasks,this.props.dateArray)}>{this.props.data}</DayStyled>
+            <DayStyled onClick = {() => this.props.onClick(this.state.tasks, this.props.data)}>{this.props.data}</DayStyled>
         );
     }
 }

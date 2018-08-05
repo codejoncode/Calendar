@@ -102,11 +102,11 @@ class App extends Component {
     year: 2018,
     start: [[2018, 0, 1], [2018, 1, 1], [2018, 2,1], [2018, 3,1], [2018, 4, 1], [2018, 5,1], [2018, 6, 1], [2018, 7,1], [2018, 8,1], [2018, 9,1], [2018,10,1], [2018, 11,1]],
     end: [[2018, 0, 31], [2018, 1, 2018 % 4 === 0 ? 29: 28], [2018, 2,31], [2018, 3,30], [2018, 4, 31], [2018, 5,30], [2018, 6, 31], [2018, 7,31], [2018, 8,30], [2018, 9,31], [2018,10,30], [2018, 11,31]],
-    
+    searh: "",
     index: 0,
     images: [],
     display: [],
-    currentlyDisplaying: [], 
+    currentlyDisplaying: "", 
     tasks: [
       {
         id: 1,
@@ -190,13 +190,13 @@ class App extends Component {
     this.setState({year: this.state.year + 1, start: start, end: end}); 
   }
 
-  taskClick = (tasks, dateArray) => {
-    console.log(dateArray);
-    
+  taskClick = (tasks, date) => {
+   
+    console.log(date);
     const display = [];
     display.push(tasks);
     console.log(display); 
-    this.setState({display:display});
+    this.setState({display:display, currentlyDisplaying: date});
   }
   
   
@@ -217,16 +217,16 @@ class App extends Component {
     for (let i = 0; i < len; i++) {
       days.unshift('');
     }
-    console.log("currently displaying", this.state.currentlyDisplaying); 
+    
     return (
       <BigDiv>
         <LeftDisplay>
         <SearchSection>
-          <input type="text" placeholder = "Search.."/>
+          <input type="text" placeholder = "Search.." value = {this.state.search}/>
           <br/>
           <button>Shift Selected</button>
         </SearchSection>
-        {this.state.display.map((task, i)=> <Task key = {i}  task = {task.task} weekDay = {task.date[1]} date={task.date[0]} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
+        {this.state.display.map((task, i)=> <Task key = {i}  task = {task.task} weekDay = {task.date[1]} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
         </LeftDisplay>
       <Container>
         <MonthCarousel month = {this.state.months[this.state.index]}> </MonthCarousel>
@@ -245,7 +245,7 @@ class App extends Component {
         </DaysOfTheWeek>
         
         <CalenderContainer>
-          {days.map((day, i ) => <Day onClick ={this.taskClick} key={i}  year={this.state.year} month = {this.state.months[this.state.index]} dateArray = {day} weekDay = {day !== "" ? day.date.format("dddd"): null} date = {day !=="" ? day.date.format("MMM Do YY"): null} data = {day !== '' ? day.date.format('D') : null} >
+          {days.map((day, i ) => <Day onClick ={this.taskClick} key={i}  year={this.state.year} month = {this.state.months[this.state.index]}  date = {day !=="" ? day.date.format("MMM Do YY"): null} data = {day !== '' ? day.date.format('D') : null} >
           </Day>)}
         </CalenderContainer>
       </Container>
