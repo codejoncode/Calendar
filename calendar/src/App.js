@@ -87,6 +87,7 @@ const RightDisplay = styled.div`
 const SearchSection = styled.div`
   margin-top: 30px;
   margin-left: 15px;
+  margin-bottom: 30px;
   input {
     width: 250px;
     height: 50px;
@@ -110,21 +111,23 @@ class App extends Component {
     currentlyDisplaying: "", 
     titleText: "",
     descriptionText: "",
-    tasks: [
-      {
-        id: 1,
-        date: [2018, 8, 1],
-        task: 'hello',
-        completed: false
-      }
-    ],
-    UItasks: []
+    tasks: [ ]
   };
 }
   componentDidMount(){
-    let indexDate = new Date(Date.now());;
-    indexDate = indexDate.getMonth(); // we want to start off on the current month of the current time. 
-    this.setState({images:images, index: indexDate});
+    let indexDate = new Date(Date.now());
+    indexDate = indexDate.getMonth(); // we want to start off on the current month of the current time.
+    const tasks = [];
+    let count = 1;
+    let obj;
+    for(count; count<32; count++){
+      obj = {};
+      obj[count] = {};
+      //id:Date.now(), title: "yes", description: "come on now"
+      tasks.push(obj);
+
+    }
+    this.setState({images:images, index: indexDate, tasks:tasks});
   }
 
   leftClick = () => {
@@ -175,6 +178,7 @@ class App extends Component {
   taskClick = (tasks, date) => {
     const display = [];
     display.push(tasks);
+    date = Number(date); 
     this.setState({display:display, currentlyDisplaying: date});
   }
 
@@ -186,7 +190,25 @@ class App extends Component {
     if(title.length > 0 && description.length > 0){
       console.log(title)
       console.log(description);
-      this.setState({titleText:"", descriptionText:""})
+      console.log(this.state.currentlyDisplaying);
+      const tasks = this.state.tasks.slice(); 
+      const selected = this.state.currentlyDisplaying -1; 
+      const selectedObj = tasks[selected];
+      const selectedDay = selectedObj[this.state.currentlyDisplaying];
+      // for(let x in tasks){
+      //   console.log(tasks[x][this.state.currentlyDisplaying])
+      //   if (x === selected){
+      //     console.log(x)
+      //     tasks[x].id = Date.now();
+      //   }
+      // }
+      console.log(selected,"selected");
+      console.log(selectedDay); 
+      selectedDay.id = Date.now();
+      selectedDay.title = title;
+      selectedDay.description = description; 
+      console.log(tasks); 
+      this.setState({titleText:"", descriptionText:"", tasks: tasks}); 
     } else {
       alert("Title and Description Required");
     }
@@ -202,7 +224,7 @@ class App extends Component {
     let days = [];
     let begin = this.state.start[this.state.index].slice();
     let end = this.state.end[this.state.index].slice();
-      
+    console.log(this.state.tasks)
     for (
       let i = moment(begin);
       i.isSameOrBefore(moment(end));// checking if the moment is at the largest date. 
@@ -222,9 +244,10 @@ class App extends Component {
         <SearchSection>
           <input type="text" placeholder = "Search.." value = {this.state.search}/>
           <br/>
+          <br/>
           <button>Shift Selected</button>
         </SearchSection>
-        {this.state.display.map((task, i)=> <Task key = {i}  task = {task.task} weekDay = {task.date[1]} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
+        {this.state.display.map((task, i)=> <Task key = {i}  task = {task.task} weekDay = {moment([this.state.year, this.state.index, this.state.currentlyDisplaying]).format('ddd')} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
         </LeftDisplay>
       <Container>
         <MonthCarousel month = {this.state.months[this.state.index]}> </MonthCarousel>
@@ -243,7 +266,7 @@ class App extends Component {
         </DaysOfTheWeek>
         
         <CalenderContainer>
-          {days.map((day, i ) => <Day onClick ={this.taskClick} key={i}  year={this.state.year} month = {this.state.months[this.state.index]}  date = {day !=="" ? day.date.format("MMM Do YY"): null} data = {day !== '' ? day.date.format('D') : null} >
+          {days.map((day, i ) => <Day tasks = {this.state.tasks[day !== '' ? day.date.format('D') : null]} onClick ={this.taskClick} key={i}  year={this.state.year} month = {this.state.months[this.state.index]}  date = {day !=="" ? day.date.format("MMM Do YY"): null} data = {day !== '' ? day.date.format('D') : null} >
           </Day>)}
         </CalenderContainer>
       </Container>
