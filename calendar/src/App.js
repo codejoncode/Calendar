@@ -192,6 +192,10 @@ class App extends Component {
     }
     
   }
+
+  handleTaskSubmit = event => {
+    event.preventDefault(); 
+  }
   
   
   render() {
@@ -244,7 +248,7 @@ class App extends Component {
         </CalenderContainer>
       </Container>
       <RightDisplay>
-        <AddTaskForm handleClick = {this.addTask} titleValue = {this.state.titleText} descriptionValue = {this.state.descriptionText} handleChange = {this.handleInputChange}>
+        <AddTaskForm handleSubmit = {this.handleTaskSubmit} handleClick = {this.addTask} titleValue = {this.state.titleText} descriptionValue = {this.state.descriptionText} handleChange = {this.handleInputChange}>
         </AddTaskForm>
       </RightDisplay>
       </BigDiv>

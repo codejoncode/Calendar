@@ -20,7 +20,7 @@ class AddTaskForm extends React.Component{
 
         return (
             <FormContainer>
-                <Form>
+                <Form onSubmit = {this.props.handleSubmit}>
                     <FormGroup>
                         <Label>Title</Label>
                         <br/>
