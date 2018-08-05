@@ -122,7 +122,7 @@ class App extends Component {
     let obj;
     for(count; count<32; count++){
       obj = {};
-      obj[count] = {};
+      obj[count] = [];
       //id:Date.now(), title: "yes", description: "come on now"
       tasks.push(obj);
 
@@ -176,11 +176,16 @@ class App extends Component {
   }
 
   taskClick = (tasks, date) => {
-    const display = [];
-    display.push(tasks);
+    //const display = [];
+    //const display = tasks[0]
+    
+    console.log(Object.values(tasks)); 
+    const display = Object.values(tasks);
+    //display.push(tasks);
     date = Number(date); 
     console.log(display);
     this.setState({display:display, currentlyDisplaying: date});
+    
   }
 
   handleInputChange = event => {
@@ -193,7 +198,7 @@ class App extends Component {
       // console.log(description);
       // console.log(this.state.currentlyDisplaying);
       const tasks = this.state.tasks.slice(); 
-      const selected = this.state.currentlyDisplaying -1; 
+      const selected = this.state.currentlyDisplaying -1;//using index of array. 
       const selectedObj = tasks[selected];
       const selectedDay = selectedObj[this.state.currentlyDisplaying];
       // for(let x in tasks){
@@ -204,14 +209,17 @@ class App extends Component {
       //   }
       // }
       // console.log(selected,"selected");
-      // console.log(selectedDay); 
-      selectedDay.id = Date.now();
-      selectedDay.title = title;
-      selectedDay.description = description; 
+      // console.log(selectedDay);
+      
+      // selectedDay.id = Date.now();
+      // selectedDay.title = title;
+      // selectedDay.description = description; 
+      selectedDay.push({title: title, description:description});
       console.log(tasks); 
       const display = this.state.display.slice();
       display.push(selectedDay);
-      this.setState({titleText:"", descriptionText:"", tasks: tasks,display:display}); 
+      this.setState({titleText:"", descriptionText:"", tasks: tasks, display:display});
+      
     } else {
       alert("Select a day by clicking on the day you wish to add a task to. Also the Title and Description are Required");
     }
@@ -250,7 +258,7 @@ class App extends Component {
           <br/>
           <button>Shift Selected</button>
         </SearchSection>
-        {this.state.display.map((task, i)=> <Task key = {i}  task = {task.title} weekDay = {moment([this.state.year, this.state.index, this.state.currentlyDisplaying]).format('ddd')} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
+        {this.state.display.map((task, i)=> <Task key = {i} tasks = {task} title = {task.title} description ={task.description} weekDay = {moment([this.state.year, this.state.index, this.state.currentlyDisplaying]).format('ddd')} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
         </LeftDisplay>
       <Container>
         <MonthCarousel month = {this.state.months[this.state.index]}> </MonthCarousel>

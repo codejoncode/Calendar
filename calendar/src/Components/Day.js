@@ -21,22 +21,26 @@ class Day extends React.Component {
     constructor(props){
         super(props); 
         this.state = {
+            tasks: this.props.tasks ? this.props.tasks: []
            
         }
     }
 
-    // componentDidMount(){
-    //     this.setState({tasks: this.props.tasks});
+    // UNSAFE_componentWillUpdate(){
+    //     if(this.props.tasks){
+    //         this.setState({tasks: this.props.tasks});
+    //     }
+         
     // }
 
     render () {
-        //console.log(this.props.tasks);
+        console.log(this.props.tasks);
         const date = this.props.data;
 
 
         return (
 
-            <DayStyled onClick = {() => this.props.onClick(this.props.tasks, this.props.data ? date: null)}>{this.props.data}</DayStyled>
+            <DayStyled onClick = {() => this.props.onClick(this.state.tasks, this.props.data ? date: null)}>{this.props.data}</DayStyled>
         );
     }
 }
