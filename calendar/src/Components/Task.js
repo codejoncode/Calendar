@@ -12,7 +12,6 @@ const TaskContainer = styled.div`
       font-size: 1vw;
       font-weight: bold;
     }
-    
 `;
 
 class Task extends React.Component{

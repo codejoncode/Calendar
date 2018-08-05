@@ -179,6 +179,7 @@ class App extends Component {
     const display = [];
     display.push(tasks);
     date = Number(date); 
+    console.log(display);
     this.setState({display:display, currentlyDisplaying: date});
   }
 
@@ -187,10 +188,10 @@ class App extends Component {
   }
 
   addTask = (title, description) => {
-    if(title.length > 0 && description.length > 0){
-      console.log(title)
-      console.log(description);
-      console.log(this.state.currentlyDisplaying);
+    if(title.length > 0 && description.length > 0 && this.state.currentlyDisplaying){
+      // console.log(title)
+      // console.log(description);
+      // console.log(this.state.currentlyDisplaying);
       const tasks = this.state.tasks.slice(); 
       const selected = this.state.currentlyDisplaying -1; 
       const selectedObj = tasks[selected];
@@ -202,15 +203,17 @@ class App extends Component {
       //     tasks[x].id = Date.now();
       //   }
       // }
-      console.log(selected,"selected");
-      console.log(selectedDay); 
+      // console.log(selected,"selected");
+      // console.log(selectedDay); 
       selectedDay.id = Date.now();
       selectedDay.title = title;
       selectedDay.description = description; 
       console.log(tasks); 
-      this.setState({titleText:"", descriptionText:"", tasks: tasks}); 
+      const display = this.state.display.slice();
+      display.push(selectedDay);
+      this.setState({titleText:"", descriptionText:"", tasks: tasks,display:display}); 
     } else {
-      alert("Title and Description Required");
+      alert("Select a day by clicking on the day you wish to add a task to. Also the Title and Description are Required");
     }
     
   }
@@ -224,7 +227,7 @@ class App extends Component {
     let days = [];
     let begin = this.state.start[this.state.index].slice();
     let end = this.state.end[this.state.index].slice();
-    console.log(this.state.tasks)
+    //console.log(this.state.tasks)
     for (
       let i = moment(begin);
       i.isSameOrBefore(moment(end));// checking if the moment is at the largest date. 
@@ -247,7 +250,7 @@ class App extends Component {
           <br/>
           <button>Shift Selected</button>
         </SearchSection>
-        {this.state.display.map((task, i)=> <Task key = {i}  task = {task.task} weekDay = {moment([this.state.year, this.state.index, this.state.currentlyDisplaying]).format('ddd')} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
+        {this.state.display.map((task, i)=> <Task key = {i}  task = {task.title} weekDay = {moment([this.state.year, this.state.index, this.state.currentlyDisplaying]).format('ddd')} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
         </LeftDisplay>
       <Container>
         <MonthCarousel month = {this.state.months[this.state.index]}> </MonthCarousel>

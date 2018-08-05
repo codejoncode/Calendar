@@ -30,13 +30,13 @@ class Day extends React.Component {
     // }
 
     render () {
-        // console.log(this.props.tasks);
+        //console.log(this.props.tasks);
         const date = this.props.data;
 
 
         return (
 
-            <DayStyled onClick = {() => this.props.onClick(this.props.tasks, this.props.data ? date: null, date)}>{this.props.data}</DayStyled>
+            <DayStyled onClick = {() => this.props.onClick(this.props.tasks, this.props.data ? date: null)}>{this.props.data}</DayStyled>
         );
     }
 }
