@@ -8,6 +8,10 @@ const FormContainer = styled.div`
 const Label = styled.label`
     font-size: 1vw;
 `;
+const AddTaskHeader = styled.h1`
+    font-size: 1vw;
+    font-weight: bold;
+`;
 
 class AddTaskForm extends React.Component{
     constructor(props){
@@ -16,11 +20,13 @@ class AddTaskForm extends React.Component{
     }
 
     render () {
-
+        const date = this.props.date +",";
 
         return (
             <FormContainer>
                 <Form onSubmit = {this.props.handleSubmit}>
+                    <AddTaskHeader>Add Task for {this.props.month} {this.props.date ? date :null} {this.props.year} </AddTaskHeader>
+                    <br/>
                     <FormGroup>
                         <Label>Title</Label>
                         <br/>

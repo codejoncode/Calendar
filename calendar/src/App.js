@@ -179,7 +179,6 @@ class App extends Component {
   }
 
   handleInputChange = event => {
-    console.log(event.target.value);
     this.setState({[event.target.name]: event.target.value})
   }
 
@@ -187,6 +186,7 @@ class App extends Component {
     if(title.length > 0 && description.length > 0){
       console.log(title)
       console.log(description);
+      this.setState({titleText:"", descriptionText:""})
     } else {
       alert("Title and Description Required");
     }
@@ -248,7 +248,7 @@ class App extends Component {
         </CalenderContainer>
       </Container>
       <RightDisplay>
-        <AddTaskForm handleSubmit = {this.handleTaskSubmit} handleClick = {this.addTask} titleValue = {this.state.titleText} descriptionValue = {this.state.descriptionText} handleChange = {this.handleInputChange}>
+        <AddTaskForm date ={this.state.currentlyDisplaying} year ={this.state.year} month = {this.state.months[this.state.index]} handleSubmit = {this.handleTaskSubmit} handleClick = {this.addTask} titleValue = {this.state.titleText} descriptionValue = {this.state.descriptionText} handleChange = {this.handleInputChange}>
         </AddTaskForm>
       </RightDisplay>
       </BigDiv>
