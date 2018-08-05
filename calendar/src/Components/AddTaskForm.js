@@ -33,7 +33,7 @@ class AddTaskForm extends React.Component{
                     <Input onChange = {this.props.handleChange} type="textarea" name="descriptionText" id="descriptionText" value = {this.props.descriptionValue} />
                     </FormGroup>
                     <br/>
-                    <button onClick = {this.props.handleClick}>Add Task</button>
+                    <button onClick = {() => this.props.handleClick(this.props.titleValue, this.props.descriptionValue)}>Add Task</button>
                 </Form>
             </FormContainer>
 
