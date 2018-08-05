@@ -183,7 +183,7 @@ class App extends Component {
 
   taskClick = (tasks, dateArray) => {
     console.log(dateArray);
-    dateArray = moment.format(dateArray);
+    
     const display = [];
     display.push(tasks);
     console.log(display); 
@@ -212,7 +212,7 @@ class App extends Component {
     return (
       <BigDiv>
         <LeftDisplay>
-        {this.state.display.map((task, i)=> <Task key = {i} display = {this.state.currentlyDisplaying} task = {task.task} weekDay = {task.date[1]} date={task.date[0]} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
+        {this.state.display.map((task, i)=> <Task key = {i}  task = {task.task} weekDay = {task.date[1]} date={task.date[0]} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
         </LeftDisplay>
       <Container>
         <MonthCarousel month = {this.state.months[this.state.index]}> </MonthCarousel>
