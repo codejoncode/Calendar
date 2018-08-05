@@ -81,7 +81,16 @@ const RightDisplay = styled.div`
   border: 1px solid blue;
 `;
 
+const SearchSection = styled.div`
+  margin-top: 30px;
+  margin-left: 15px;
+  input {
+    width: 250px;
+    height: 50px;
+    max-width: 100%; 
+  }
 
+`;
 
 
 class App extends Component {
@@ -212,6 +221,11 @@ class App extends Component {
     return (
       <BigDiv>
         <LeftDisplay>
+        <SearchSection>
+          <input type="text" placeholder = "Search.."/>
+          <br/>
+          <button>Shift Selected</button>
+        </SearchSection>
         {this.state.display.map((task, i)=> <Task key = {i}  task = {task.task} weekDay = {task.date[1]} date={task.date[0]} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
         </LeftDisplay>
       <Container>
@@ -228,7 +242,6 @@ class App extends Component {
           <DayText>Thursday</DayText>
           <DayText>Friday</DayText>
           <DayText>Saturday</DayText>
-      
         </DaysOfTheWeek>
         
         <CalenderContainer>
