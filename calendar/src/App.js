@@ -181,8 +181,12 @@ class App extends Component {
     console.log(this.state.tasks[date])
     console.log(display);
     console.log(date);
+    console.log(tasks);
     //console.log(Object.values(tasks)); 
     console.log()
+    for (let x in tasks){
+      console.log(tasks[x]);
+    }
     for(let i = 0; i<tasks.length; i++){
       display.push(tasks[i]);
     }
