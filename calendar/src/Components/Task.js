@@ -23,14 +23,14 @@ class Task extends React.Component{
     }
 
     render() {
-
+        console.log(this.props);
         return (
             <TaskContainer>
                 <h1>Task for {this.props.weekDay} {this.props.month} {this.props.date} {this.props.year}</h1>
                 <br/>
                 <br/>
-                <p>{this.props.title}{this.props.description}</p>
-                <h1>{this.props.task}</h1>
+                <h1>Title: {this.props.title}</h1>
+                <h1>Description: {this.props.description}</h1>
                 <br/>
             </TaskContainer> 
 

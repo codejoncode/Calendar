@@ -176,15 +176,25 @@ class App extends Component {
   }
 
   taskClick = (tasks, date) => {
-    //const display = [];
+    const display = [];
     //const display = tasks[0]
-    
-    console.log(Object.values(tasks)); 
-    const display = Object.values(tasks);
-    //display.push(tasks);
+    console.log(this.state.tasks[date])
+    console.log(display);
+    console.log(date);
+    //console.log(Object.values(tasks)); 
+    console.log()
+    for(let i = 0; i<tasks.length; i++){
+      display.push(tasks[i]);
+    }
+    //const display = Object.values(tasks);
+    //display.push(tasks); 
     date = Number(date); 
     console.log(display);
-    this.setState({display:display, currentlyDisplaying: date});
+    if(typeof tasks === 'object' && tasks.length){
+      this.setState({display:Object.values(tasks), currentlyDisplaying:date})
+    }else {
+      this.setState({display:display, currentlyDisplaying: date});
+    }
     
   }
 
@@ -192,7 +202,7 @@ class App extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  addTask = (title, description) => {
+  addTask = (title, description,date) => {
     if(title.length > 0 && description.length > 0 && this.state.currentlyDisplaying){
       // console.log(title)
       // console.log(description);
@@ -200,6 +210,7 @@ class App extends Component {
       const tasks = this.state.tasks.slice(); 
       const selected = this.state.currentlyDisplaying -1;//using index of array. 
       const selectedObj = tasks[selected];
+      console.log(selectedObj);
       const selectedDay = selectedObj[this.state.currentlyDisplaying];
       // for(let x in tasks){
       //   console.log(tasks[x][this.state.currentlyDisplaying])
@@ -258,7 +269,7 @@ class App extends Component {
           <br/>
           <button>Shift Selected</button>
         </SearchSection>
-        {this.state.display.map((task, i)=> <Task key = {i} tasks = {task} title = {task.title} description ={task.description} weekDay = {moment([this.state.year, this.state.index, this.state.currentlyDisplaying]).format('ddd')} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
+        {this.state.display.map((task, i)=> <Task key = {i} tasks = {task} title = {task[0].title} description ={task[0].description} weekDay = {moment([this.state.year, this.state.index, this.state.currentlyDisplaying]).format('ddd')} date={this.state.currentlyDisplaying} year = {this.state.year} month = {this.state.months[this.state.index]}></Task>)}
         </LeftDisplay>
       <Container>
         <MonthCarousel month = {this.state.months[this.state.index]}> </MonthCarousel>
