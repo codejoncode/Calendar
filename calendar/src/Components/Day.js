@@ -22,9 +22,14 @@ class Day extends React.Component {
         super(props); 
         this.state = {
             
-            //tasks: this.props.tasks[0]
+            tasks: typeof this.props.tasks === 'object' && this.props.tasks.length > 0 ? this.props.tasks : []
            
         }
+    }
+
+    getData = () => {
+        this.setState({tasks:this.props.tasks})
+        return this.props.tasks;
     }
 
     // UNSAFE_componentWillUpdate(){
@@ -35,13 +40,14 @@ class Day extends React.Component {
     // }
 
     render () {
-        //console.log(this.props.tasks);
+        console.log(this.props.tasks);
+        console.log(this.state.tasks);
         const date = this.props.data;
 
 
         return (
 
-            <DayStyled onClick = {() => this.props.onClick(this.props.tasks, this.props.data+1 ? date: null)}>{this.props.data}</DayStyled>
+            <DayStyled onClick = {() => this.props.onClick(this.getData(), this.props.data ? date: null,this.props.date)}>{this.props.data}</DayStyled>
         );
     }
 }
